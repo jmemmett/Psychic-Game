@@ -1,0 +1,23 @@
+body {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+h2 {
+    font-size:20px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.stats {
+    padding: 10px 0;
+}
