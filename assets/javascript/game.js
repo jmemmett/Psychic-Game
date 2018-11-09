@@ -8,7 +8,6 @@
     var wins = 0;
     var losses = 0;
     var remainingGuesses = 9;
-    var previousGuesses = []; // setting this variable to an array so we can push letters as they are guessed into it
     var guessedLetters = []; // creating this empty array to contain all of the user guesses to display back to them on the HTML page
     
     
