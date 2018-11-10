@@ -1,10 +1,14 @@
+//-----------------------------------
+// Variable Declarations
+//-----------------------------------
    
-   // the array of possible letters used to play the game
+    // the array of possible letters used to play the game
     var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
     // Initialize variables need to keep track of guesses and score
     var enteredLetter;
     var randomLetter;
+    var randomAssigned = false;
     var wins = 0;
     var losses = 0;
     var remainingGuesses = 9;
@@ -15,37 +19,47 @@
     document.getElementById("wins").innerHTML = wins;
     document.getElementById("losses").innerHTML = losses;
     document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
-   // Function definitions
 
-    // generate a random letter from the letters array
+//-----------------------------------
+// Function Definitions
+//-----------------------------------
+
+    // Generate a random letter
     function letterToGuess() {
         randomLetter = letters[Math.floor(Math.random() * letters.length)];
     }
 
-    // when the user enters a keystroke
-    
-    document.onkeyup = function(event) {
-        // place the lower case version of the letter entered into a variable named enteredLetter
+    // When the user presses a key
+        document.onkeyup = function(event) {
         var enteredLetter = event.key.toLowerCase();
-        guessedLetters.push(enteredLetter);
-        console.log("Letter entered by the user: " + enteredLetter);
-        // compare enteredLetter to the letters array and make sure that the value isn't -1. This will ensure that it was in fact one of the 26 letters in array
-        if ( letters.indexOf(enteredLetter) !== -1 ) {
-            // message confirming that the user entered a valid number to play the game
-            alert("The letter you entered is valid!");
-            console.log("Random Letter to guess: " + randomLetter);
-            /* Now that the user has entered a valid guess, we can prompt the game to generate a random number that will be used to compare with the user guess */
-            letterToGuess();
-            // generate a random letter from the letters array and store it in a variable named randomLetter
-            // letterToGuess();
-            console.log("Random Letter to guess: " + randomLetter);
-            document.getElementById("previousGuesses").innerHTML = guessedLetters; // how do I append each entered value to this and replace the innerHTML with the total guesses entered as the game moves along?
-            
+        remainingGuesses = remainingGuesses - 1;
+        if ( remainingGuesses !== 0 ) {
+            if ( letters.indexOf(enteredLetter) !== -1 ) {
+                guessedLetters.push(enteredLetter);
+                document.getElementById("previousGuesses").innerHTML = guessedLetters;
+                /* This isn't working like I want it to. I'd like to separate the display of the array items with an extra space */
+            } else {
+                alert("Please enter a single letter (a - z) to continue playing the game.");
+            }
+
+            if ( enteredLetter === randomLetter) {
+
+            } else {
+                document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
+            }
+
+            // 
         } else {
-            alert("Please enter a single letter (a - z) to continue playing the game.");
+            alert("Game over! You Lose!");
         }
-        
-        
+    }
+
+//-----------------------------------
+// Program 
+//-----------------------------------
+    window.onload = function() {
+        letterToGuess();
+        console.log("Random letter to guess: " + randomLetter);
     }
 
     // compare the enteredLetter to randomLetter
