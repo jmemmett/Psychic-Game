@@ -27,6 +27,27 @@
         randomLetter = letters[Math.floor(Math.random() * letters.length)];
     }
 
+    // Update Wins
+    function winnerChickenDinner() {
+        wins++;
+        document.getElementById("wins").innerHTML = wins;
+    }
+
+    // Update Losses
+    function loser() {
+        losses++;
+        document.getElementById("losses").innerHTML = losses;
+    }
+
+    // Game over, reset stats
+    function reset() {
+        letterToGuess(); // generate a new random letter
+        remainingGuesses = 9;
+        guessedLetters = [];
+        document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
+        document.getElementById("previousGuesses").innerHTML = guessedLetters;
+    }
+
 //-----------------------------------
 // Program 
 //-----------------------------------
@@ -42,16 +63,13 @@
                 guessedLetters.push(enteredLetter); // adds each letter guessed by the user to the guessedLetters array
                 document.getElementById("previousGuesses").innerHTML = guessedLetters // outputs the contents of the guessedLetters array to the HTML document
                 if (enteredLetter === randomLetter) { // if the user made a correct guess
-                    // update stats
-                        wins++;
-                        remainingGuesses = 9;
-                        previousGuesses = [];
                     // display winning message
-                    alert("You guessed the letter I was thinking of! YOU WIN!!!");
-                    // update display of stats
-                        document.getElementById("wins").innerHTML = wins;
-                        document.getElementById("previousGuesses").innerHTML = previousGuesses;
-                        document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
+                        alert("You guessed the letter I was thinking of! YOU WIN!!!");
+                    // update stats
+                        winnerChickenDinner();
+                        remainingGuesses = 9;
+                    // reset game
+                        reset();
                     // reset the random letter
                         letterToGuess();
                         console.log("Random letter to guess: " + randomLetter);
@@ -59,14 +77,12 @@
                     remainingGuesses = remainingGuesses - 1;
                     document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
                     if ( remainingGuesses === 0) {
-                        // update stats
-                            losses++;
-                            previousGuesses = [];
                         // display losing message
                             alert("Game over! You lose this round!");
-                        // update display of stats
-                            document.getElementById("losses").innerHTML = losses;
-                            document.getElementById("previousGuesses").innerHTML = previousGuesses;
+                        // update stats
+                            loser();
+                        // reset game
+                            reset();
                         // reset the random letter
                             letterToGuess();
                             console.log("Random letter to guess: " + randomLetter);
